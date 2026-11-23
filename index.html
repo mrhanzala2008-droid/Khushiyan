@@ -102,6 +102,15 @@ input{width:100%;font:inherit;font-weight:600;padding:12px 14px;border:3px solid
 <div id="board"></div>
 <div id="gm" class="meta"></div>
 </section>
+
+<section class="pane" id="sendPane" style="margin-top:18px">
+  <h2>Apne Jawabat Bhejo 💌</h2>
+  <p class="meta">Apne jawab Hanzala ko bhejo. Submit karne par tumhare answers email ke zariye send ho jayenge.</p>
+  <input id="senderName" type="text" maxlength="60" placeholder="Apna naam (optional)" autocomplete="name">
+  <button class="btn go" id="sendAnswers" type="button">Mere Jawabat Bhejo ❤️</button>
+  <p class="meta" id="sendStatus" role="status" aria-live="polite"></p>
+</section>
+
 </main>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>s.replace(/[<>&"]/g,'');
@@ -188,4 +197,97 @@ else{g.lock=true;hud();setTimeout(()=>{if(G!==g)return;a.classList.remove('up');
 function end(w){const lv=G.lv;clearInterval(G.ti);G.lock=true;G=null;$('#hud').innerHTML='<span>Khel khatam</span>';
 if(w){cele(lv==2?'SAB JEET LIYE! 👑':'LEVEL PAAR! ⭐');if(open<=lv+1&&lv<2)open=lv+2;$('#gm').textContent=lv<2?'Wah! Agla level khul gaya hai.':'Teeno level jeet liye. Tum to yaadasht ke badshah ho!'}else $('#gm').textContent='Bas thori si kami reh gayi. Level dobara dabao!';lvl()}
 lvl();
+
+/* Formspree answer collection and submission */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoedkgoq';
+const answerLog = [];
+function saveAnswer(section, question, answer) {
+  answerLog.push({
+    section,
+    question: String(question || ''),
+    answer: String(answer || ''),
+    time: new Date().toLocaleString()
+  });
+}
+
+// Capture answer selections from the four activities.
+document.addEventListener('click', function(event) {
+  const b = event.target.closest('button');
+  if (!b) return;
+
+  if (b.matches('#p1 button[data-i]') && typeof F !== 'undefined' && F[fi]) {
+    const index = Number(b.dataset.i);
+    saveAnswer('Hansi', F[fi][0], F[fi][1][index]);
+  } else if (b.matches('#p2 .chips button[data-i]') && typeof M !== 'undefined') {
+    const index = Number(b.dataset.i);
+    if (M[index]) saveAnswer('Jadoo', 'Chuna hua mood', M[index][1]);
+  } else if (b.id === 'mk') {
+    const name = document.querySelector('#nm')?.value.trim() || 'Anjaan Sitara';
+    const moodName = typeof mood !== 'undefined' && mood >= 0 && M[mood] ? M[mood][1] : 'Not selected';
+    saveAnswer('Jadoo', 'Naam aur mood', name + ' — ' + moodName);
+  } else if (b.matches('#p3 button[data-i]') && typeof Q !== 'undefined' && Q[qi]) {
+    const index = Number(b.dataset.i);
+    const chosen = Q[qi][1][index];
+    const correct = index === Q[qi][2];
+    saveAnswer('Quiz', Q[qi][0], chosen + (correct ? ' (Sahi jawab)' : ' (Ghalat jawab)'));
+  } else if (b.matches('#lv button[data-i]') && typeof L !== 'undefined') {
+    const index = Number(b.dataset.i);
+    if (L[index]) saveAnswer('Khel', 'Yaadasht game level', L[index].n);
+  } else if (b.matches('#board .mc')) {
+    saveAnswer('Khel', 'Yaadasht game card', b.dataset.e || 'Card');
+  }
+}, true);
+
+document.querySelector('#sendAnswers').addEventListener('click', async function() {
+  const button = this;
+  const status = document.querySelector('#sendStatus');
+  const senderName = document.querySelector('#senderName').value.trim();
+
+  if (answerLog.length === 0) {
+    status.textContent = 'Pehle koi game ya sawal khelo, phir jawab bhejo. 😊';
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = 'Jawabat bheje ja rahe hain…';
+  status.textContent = 'Please wait…';
+
+  const payload = {
+    _subject: 'Khushi Ka Lifafa — Maryam ke Jawabat',
+    name: senderName || 'Naam nahi diya',
+    answers: answerLog.map((item, index) =>
+      `${index + 1}. [${item.section}] ${item.question}: ${item.answer} (${item.time})`
+    ).join('\n'),
+    total_answers: answerLog.length
+  };
+
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      status.textContent = 'Yay! Tumhare jawabat kamyabi se bhej diye gaye. ❤️';
+      button.textContent = 'Jawabat Bhej Diye ✓';
+      button.classList.add('ok');
+    } else {
+      let detail = '';
+      try {
+        const data = await response.json();
+        detail = data.errors?.map(error => error.message).join(' ') || '';
+      } catch (_) {}
+      throw new Error(detail || 'Form submit nahi ho saka.');
+    }
+  } catch (error) {
+    status.textContent = 'Jawabat send nahi ho sake. Internet check karke dobara try karo. ' + error.message;
+    button.disabled = false;
+    button.textContent = 'Dobara Jawabat Bhejo ❤️';
+  }
+});
+
 </script></body></html>
