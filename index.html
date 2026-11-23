@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ur-Latn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Khushi Ka Lifafa</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF4DC;--card:#FFFFFF;--ink:#2B1B4D;--mut:#6B5B8A;--a:#FF5C8A;--b:#FFD23F;--c:#1FB8B5;--ok:#22C55E;--no:#EF4444;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1B1033;--card:#2B1B4D;--ink:#FFF4DC;--mut:#B9A9D9;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1B1033;--card:#2B1B4D;--ink:#FFF4DC;--mut:#B9A9D9;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.45 Fredoka,"Trebuchet MS",system-ui,sans-serif;min-height:100vh}
+main{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:2rem;margin:4px 0 2px;font-weight:700}
+.sub{color:var(--mut);margin:0 0 16px}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.tab{font:inherit;font-weight:600;font-size:.88rem;padding:10px 2px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);cursor:pointer}
+.tab.on{background:var(--b);color:#2B1B4D;box-shadow:3px 3px 0 var(--ink)}
+.pane{background:var(--card);border:3px solid var(--ink);border-radius:24px;box-shadow:6px 6px 0 var(--ink);padding:20px}
+.pane[hidden]{display:none}
+h2{margin:0 0 4px;font-size:1.4rem}
+.meta{color:var(--mut);font-size:.92rem;margin:0 0 12px}
+.bar{height:10px;border:2px solid var(--ink);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--a);width:0;transition:width .3s}
+.q{font-size:1.25rem;font-weight:600;margin:6px 0 14px}
+.btn{display:block;width:100%;text-align:left;font:inherit;font-weight:600;color:var(--ink);background:var(--card);border:3px solid var(--ink);border-radius:16px;padding:12px 14px;margin:0 0 10px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .08s}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn:focus-visible,.tab:focus-visible,input:focus-visible,.mc:focus-visible{outline:3px solid var(--c);outline-offset:2px}
+.btn.ok{background:var(--ok);color:#052e16}.btn.no{background:var(--no);color:#fff;animation:sh .35s}
+.btn[disabled]{cursor:default}
+.go{background:var(--a);color:#fff;text-align:center}
+.react{background:var(--b);color:#2B1B4D;border:3px solid var(--ink);border-radius:16px;padding:12px 14px;margin:6px 0 12px;font-weight:600}
+input{width:100%;font:inherit;font-weight:600;padding:12px 14px;border:3px solid var(--ink);border-radius:16px;background:var(--bg);color:var(--ink);margin-bottom:12px}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.chips .btn{margin:0;text-align:center;font-size:.95rem}.chips .btn.sel{background:var(--c);color:#052e2e}
+.orb{width:120px;height:120px;margin:18px auto 8px;border-radius:50%;border:3px solid var(--ink);background:radial-gradient(circle at 35% 30%,#fff,#b69cff 40%,#5b2bd6);animation:pulse 1s ease-in-out infinite}
+.lm{text-align:center;font-weight:600}
+@keyframes pulse{50%{transform:scale(1.12) rotate(8deg);box-shadow:0 0 40px #b69cff}}
+.holo{perspective:700px;margin-top:8px}
+.hc{border:3px solid var(--ink);border-radius:22px;padding:20px 18px;text-align:center;color:#2B1B4D;background:conic-gradient(from var(--ang,0deg),#ff9ad5,#ffe66d,#7df9ff,#b69cff,#ff9ad5);animation:spin 6s linear infinite;box-shadow:5px 5px 0 var(--ink);transition:transform .1s;margin-bottom:14px}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--ang:360deg}}
+.hc small{display:block;font-weight:600;opacity:.75}
+.hc b{display:block;font-size:1.6rem;line-height:1.15;margin:4px 0 10px}
+.hc .n{font-size:2.6rem;font-weight:700;line-height:1}
+.st{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:center;text-align:left;font-weight:600;font-size:.9rem;margin:5px 0}
+.st i{display:block;height:12px;border:2px solid #2B1B4D;border-radius:8px;background:#ffffff88;overflow:hidden}.st u{display:block;height:100%;width:0;background:#2B1B4D;transition:width 1s}
+.lv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px}
+.lv .btn{text-align:center;margin:0;padding:10px 2px;font-size:.88rem}.lv .btn[disabled]{opacity:.45}
+.hud{display:flex;gap:14px;font-weight:700;flex-wrap:wrap;min-height:28px}
+#board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.mc{aspect-ratio:1;border:3px solid var(--ink);border-radius:14px;background:var(--a);font-size:1.9rem;cursor:pointer;padding:0;box-shadow:2px 2px 0 var(--ink);line-height:1}
+.mc span{display:none}.mc.up span{display:inline}.mc:not(.up)::before{content:"❓"}.mc.up{background:var(--b);animation:pop .2s}.mc.done{background:var(--ok)}
+#cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:150}
+#ban{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%) scale(0);font-size:clamp(1.8rem,9vw,3.4rem);font-weight:700;color:#fff;background:var(--a);border:4px solid #2B1B4D;border-radius:26px;padding:12px 24px;box-shadow:6px 6px 0 #2B1B4D;z-index:160;pointer-events:none;white-space:nowrap}
+#ban.go{animation:ban 1.5s ease forwards}
+@keyframes ban{0%{transform:translate(-50%,-50%) scale(0) rotate(-12deg)}18%{transform:translate(-50%,-50%) scale(1.15) rotate(4deg)}30%{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}80%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-80%) scale(.8);opacity:0}}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes pop{from{transform:scale(.4)}}
+/* envelope intro */
+#env{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;text-align:center;padding:20px;transition:opacity .5s}
+#env.bye{opacity:0;pointer-events:none}
+.ew{width:100%;max-width:320px}
+.env{position:relative;width:260px;height:170px;margin:70px auto 28px;background:#E59A3C;border:3px solid var(--ink);border-radius:8px;cursor:pointer;transition:transform .45s cubic-bezier(.3,1.6,.5,1);box-shadow:5px 5px 0 var(--ink)}
+.env.shk{animation:wob .7s}
+@keyframes wob{15%{transform:rotate(-12deg) translateX(-14px)}35%{transform:rotate(12deg) translateX(14px)}55%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.letter{position:absolute;left:14px;right:14px;top:10px;height:150px;background:#fff;color:#2B1B4D;border:2px solid #2B1B4D;border-radius:6px;padding:14px 10px;z-index:1;transition:transform .8s cubic-bezier(.3,1.5,.5,1) .35s}
+.letter b{display:block;font-size:1.3rem}.letter span{font-size:.85rem}
+.front{position:absolute;inset:0;background:#F2B35E;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);z-index:2;border-radius:6px}
+.flap{position:absolute;left:0;top:0;width:100%;height:100px;background:#D9822B;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .5s cubic-bezier(.3,1.6,.5,1);z-index:3}
+.seal{position:absolute;left:50%;top:82px;transform:translateX(-50%);font-size:2rem;z-index:4;transition:opacity .2s}
+.env.open{cursor:default}.env.open .flap{transform:rotateX(180deg);z-index:0}.env.open .letter{transform:translateY(-120px)}.env.open .seal{opacity:0}
+#et{font-weight:600;min-height:3em;margin:0 0 12px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+</style></head><body>
+<canvas id="cv"></canvas><div id="ban" aria-live="polite"></div>
+
+<div id="env"><div class="ew">
+<div class="env" id="ev" role="button" tabindex="0" aria-label="Lifafa">
+<div class="letter"><b>Surprise! 🎉</b><span>Andar chaar chhoti khushiyan hain. Hansna mana nahi hai!</span></div>
+<div class="front"></div><div class="flap"></div><div class="seal">💌</div></div>
+<p id="et">Yeh lifafa sirf tumhare liye hai. Kholo to sahi!</p>
+<button class="btn go" id="eb">Lifafa kholo</button>
+</div></div>
+
+<main>
+<h1>Khushi Ka Lifafa 💌</h1>
+<p class="sub">Chaar chhoti chhoti khushiyan. Jis order mein marzi, kholo.</p>
+<nav>
+<button class="tab on" data-t="p1">😂 Hansi</button>
+<button class="tab" data-t="p2">✨ Jadoo</button>
+<button class="tab" data-t="p3">🧠 Quiz</button>
+<button class="tab" data-t="p4">🎮 Khel</button>
+</nav>
+<section class="pane" id="p1"></section>
+<section class="pane" id="p2" hidden></section>
+<section class="pane" id="p3" hidden></section>
+<section class="pane" id="p4" hidden>
+<h2>Yaadasht Ka Khel 🧠</h2>
+<p class="meta">Jore milao. Jaldi karo, chaalein limited hain. Ek level jeeto, agla khul jayega.</p>
+<div class="lv" id="lv"></div>
+<div class="hud" id="hud"><span>Level chuno</span></div>
+<div id="board"></div>
+<div id="gm" class="meta"></div>
+</section>
+</main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],esc=s=>s.replace(/[<>&"]/g,'');
+$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('on',x===b));$$('.pane').forEach(p=>p.hidden=p.id!==b.dataset.t)});
+
+/* confetti + banner */
+const cv=$('#cv'),cx=cv.getContext('2d');let P=[],run=false;
+function fit(){cv.width=innerWidth;cv.height=innerHeight}fit();addEventListener('resize',fit);
+function burst(n=120,x=innerWidth/2,y=innerHeight/3){const C=['#FF5C8A','#FFD23F','#3DDBD9','#8B5CF6','#FFFFFF'];for(let i=0;i<n;i++){const a=Math.random()*6.28,s=3+Math.random()*9;P.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-4,w:6+Math.random()*7,h:4+Math.random()*6,c:C[i%5],r:Math.random()*6,vr:Math.random()*.4-.2,l:90+Math.random()*60})}if(!run){run=true;tick()}}
+function tick(){cx.clearRect(0,0,cv.width,cv.height);P=P.filter(p=>p.l-->0);P.forEach(p=>{p.vy+=.28;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.globalAlpha=Math.min(1,p.l/30);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});if(P.length)requestAnimationFrame(tick);else run=false}
+const CH=['WAH WAH! 🎉','MASHALLAH! 🧠','ZABARDAST! 🔥','SHABASH! 👑','KAMAAL KAR DIYA! 🚀','SAHI JAWAB! 🌟'];
+function cele(t){burst(150);setTimeout(()=>burst(90,innerWidth*.2,innerHeight*.5),180);setTimeout(()=>burst(90,innerWidth*.8,innerHeight*.5),360);const b=$('#ban');b.textContent=t||CH[Math.random()*CH.length|0];b.classList.remove('go');void b.offsetWidth;b.classList.add('go')}
+
+/* envelope */
+let en=0;const EM=['Hehe! Lifafa bhaag gaya. Pakro isse! 🏃','Arre arre, gudgudi ho rahi hai! 🤭','Achha theek hai, ab sach mein khol raha hoon…','Ta-daaa! Dekha, nikla na surprise? 🎉'];
+function envGo(){if(en>2)return;const e=$('#ev'),t=$('#et');en++;
+if(en==1){e.style.transform=`translate(${(Math.random()<.5?-1:1)*(50+Math.random()*30)}px,${-30+Math.random()*60}px) rotate(${-15+Math.random()*30}deg)`;$('#eb').textContent='Phir pakro'}
+else if(en==2){e.style.transform='translate(0,0)';e.classList.add('shk');$('#eb').textContent='Ab to khol do'}
+else{e.classList.remove('shk');e.style.transform='';e.classList.add('open');burst(120,innerWidth/2,innerHeight/2);$('#eb').textContent='Andar chalo 🎁';setTimeout(()=>{en=4},300)}
+t.textContent=EM[en==3?3:en-1]}
+$('#ev').onclick=envGo;$('#ev').onkeydown=e=>{if(e.key=='Enter'||e.key==' ')envGo()};
+$('#eb').onclick=()=>{if(en>=3&&$('#ev').classList.contains('open')&&en==4){$('#env').classList.add('bye');setTimeout(()=>$('#env').remove(),600)}else envGo()};
+
+/* 1. hansi */
+const F=[
+["Fridge mein aakhri kabab bacha hai. Tum…",["Chupke se kha lo, kisi ko pata nahi chalega","Sab mein barabar baant do"],["Jasoos bhai ne CCTV dekh liya hai 🕵️","Ek farishta zameen par utar aaya!"]],
+["Koi ek superpower chuno:",["Kabootron se baatein","Remote hamesha mil jaye"],["Kabootron ke paas bohat gossip hai.","Asli hero! Ghar walay geet likhenge."]],
+["Subah 6 baje alarm baja. Tum…",["Alarm se mol-tol karo","Phone takiye ke neeche chhupa do"],["“Bas paanch minute” kanooni muaahida hai.","Phone ab witness protection mein hai."]],
+["Load shedding ho gayi. Tum…",["Torch jala ke bhoot ki kahani sunao","Pankhe ko gusse se ghoorte raho"],["Sab ko daranay mein tum champion ho!","Pankha bhi sharminda hai, magar hawa nahi aayi."]],
+["Chai mein biscuit dubote ho to…",["Aadha gir kar shaheed ho jata hai","Perfect dubki, poora salamat"],["Biscuit ko 21 tope ki salaami.","Dubki ka Olympic gold tumhara!"]],
+["Rishta aunty ne poocha: beta kya karte ho?",["Bolo: main influencer hoon","Bolo: bas soya hota hoon"],["Aunty ne note kiya: berozgar, magar mashhoor.","Aunty ki aankhon mein hamdardi aur biscuit."]],
+["Dawat mein biryani saamne hai. Tum…",["Pehle plate bharo, sharam baad mein","Teen baar poochne par haan karo"],["Aadhi biryani plate mein, aadhi dil mein.","Tehzeeb ki misaal! Magar biryani khatam ho gayi."]],
+["Karaoke ka mauka mila. Tum…",["Poori rooh se, ghalat lafzon ke saath","Bathroom mein chhup jao"],["Standing ovation un logon se jinhein lafz nahi aate.","Sabun ne bhi taali bajayi."]],
+["Tumhari villain wali kahani shuru hui jab…",["Kisi ne tumhara leftover kha liya","WiFi ka password badal diya gaya"],["Dukhad. Peeche bijli kadki.","Na-qabil-e-maafi! Zor ka qehqaha!"]]];
+let fi=0,fa=0;
+function fun(){const p=$('#p1');if(fi>=F.length){const g=fa>=5;p.innerHTML=`<h2>${g?'Pakka Chaos Baba 👺':'Sharif Aloo 🥔'}</h2><p class="q">${g?'Tum snacks aur ajeeb faislon se chalte ho. Sab tumse pyar karte hain.':'Seedhay saadhay aur pyaare. Dost sab se pehle tumhein message karte hain.'}</p><button class="btn go" id="rs">Dobara khelo</button>`;burst(100);$('#rs').onclick=()=>{fi=0;fa=0;fun()};return}
+const [q,o]=F[fi];p.innerHTML=`<h2>Hansi Ke Sawal 😂</h2><p class="meta">Sawal ${fi+1} / 9. Koi jawab galat nahi, bas faislay galat hain.</p><div class="bar"><i style="width:${fi/9*100}%"></i></div><p class="q">${q}</p>`+o.map((t,i)=>`<button class="btn" data-i="${i}">${t}</button>`).join('')+'<div id="fr"></div>';
+$$('#p1 .btn').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!i)fa++;$$('#p1 .btn').forEach(x=>x.disabled=true);$('#fr').innerHTML=`<div class="react">${F[fi][2][i]} 😄</div><button class="btn go" id="nx">${fi==8?'Mera result dikhao':'Agla sawal'}</button>`;$('#nx').onclick=()=>{fi++;fun()}})}
+fun();
+
+/* 2. jadoo */
+const M=[['😴','Thaka hua',['Sultan-e-Neend','Nawab Sust','Hazrat Takiya'],'Kahin bhi so jata hai'],['🤪','Hyper',['Shehzada Dhamaal','Malika Toofan','Baba Bijli'],'Chai ke baghair bhi uchhalta hai'],['😍','Ashiq',['Shehzada Gulab','Malika Ishq','Majnu Junior'],'Har cheez mein pyar dhoond leta hai'],['🍛','Bhooka',['Raja Biryani','Rani Nihari','Chacha Chatni'],'Door se khaane ki khushboo pehchanta hai']];
+const PR=['Aaj koi chai ke liye poochega. Mana mat karna.','Kal tumhein ek achhi khabar milegi, shayad paise bhi.','Jo tumhara intezar kar raha hai, woh bhi chai pi raha hai.','Aaj ka din tumhara hai, bas ghar se bahar mat nikalna.','Aaj ek purana dost message karega. Jawab zaroor dena.','Tumhari muskaan aaj kisi ka din bana degi.'];
+const LD=['Jinnat ko bulaya ja raha hai…','Chai ubal rahi hai…','Rishta aunty se mashwara ho raha hai…','Sitaron ka WiFi connect ho raha hai…','Qismat ka parcha print ho raha hai…'];
+let mood=-1;
+function jadoo(){$('#p2').innerHTML=`<h2>Jinnat Ki Parchi ✨</h2><p class="meta">Apna naam likho aur mood chuno. Jinnat tumhari qismat ka card banayega.</p><input id="nm" placeholder="Tumhara naam" maxlength="24" autocomplete="off"><div class="chips">${M.map((m,i)=>`<button class="btn" data-i="${i}">${m[0]} ${m[1]}</button>`).join('')}</div><button class="btn go" id="mk">Jinnat bulao 🧞</button><div id="holo"></div>`;mood=-1;
+$$('.chips .btn').forEach(b=>b.onclick=()=>{mood=+b.dataset.i;$$('.chips .btn').forEach(x=>x.classList.toggle('sel',x===b))});
+$('#mk').onclick=()=>{if(mood<0){$('#holo').innerHTML='<div class="react">Pehle apna mood to chuno! 😅</div>';return}
+const n=esc($('#nm').value.trim())||'Anjaan Sitara';let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))>>>0;
+let k=0;const H=$('#holo');H.innerHTML='<div class="orb"></div><p class="lm" id="lm">'+LD[0]+'</p>';const iv=setInterval(()=>{k++;if(k<LD.length)$('#lm').textContent=LD[k]},650);
+setTimeout(()=>{clearInterval(iv);const m=M[mood],S=[['Hansi',60+h%41],['Himmat',50+(h>>3)%51],['Bhook',70+(h>>5)%31]];
+H.innerHTML=`<div class="holo"><div class="hc" id="hc"><small>Sarkari Khushi Parchi</small><b>${m[2][h%3]} ${n}</b><small>Khaas taqat</small><b style="font-size:1.05rem">${m[3]}</b><small>Aaj ki peshgoi</small><b style="font-size:1rem">${PR[(h>>2)%6]}</b>${S.map(s=>`<div class="st"><span>${s[0]}</span><i><u data-w="${s[1]}"></u></i></div>`).join('')}<small style="margin-top:8px">Khushnaseeb number</small><span class="n">${h%99+1}</span></div></div><button class="btn" id="rj">Dobara jadoo karo 🔁</button>`;
+burst(120,innerWidth/2,innerHeight/2);setTimeout(()=>$$('.st u').forEach(u=>u.style.width=u.dataset.w+'%'),50);$('#rj').onclick=jadoo;
+const c=$('#hc');c.onpointermove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${x*20}deg) rotateX(${-y*20}deg)`};c.onpointerleave=()=>c.style.transform=''},3300)}}
+jadoo();
+
+/* 3. quiz */
+const Q=[["Pakistan ka darul hukumat kaun sa shehar hai?",["Islamabad","Lahore","Karachi"],0],["Pakistan ki sab se unchi chotti kaun si hai?",["Nanga Parbat","Tirich Mir","K2"],2],["Octopus ke kitne dil hote hain?",["1","2","3"],2],["Pakistan ka sab se lamba darya kaun sa hai?",["Jhelum","Indus (Sindh)","Ravi"],1],["Zameen par sab se tez daudne wala janwar?",["Cheetah","Ghora","Sheru"],0],["Dhanak mein kitne rang hote hain?",["5","6","7"],2]];
+let qi=0,qs=0,sk=0,bs=0,tm=null;
+function quiz(){clearTimeout(tm);const p=$('#p3');if(qi>=Q.length){const r=qs>=6?'Quiz Ka Badshah 👑':qs>=4?'Zehni Sher 🦁':qs>=2?'Koshish Jari Hai 💪':'Chalo Dobara Try Karo 😄';p.innerHTML=`<h2>${r}</h2><p class="q">${qs} / ${Q.length} sahi jawab. Points: ${qs*10+bs} (streak bonus ke saath).</p><button class="btn go" id="qr">Dobara khelo</button>`;if(qs>=5)cele('QUIZ CHAMPION! 🏆');$('#qr').onclick=()=>{qi=0;qs=0;sk=0;bs=0;quiz()};return}
+const [q,o,c]=Q[qi];p.innerHTML=`<h2>Dimagh Ka Quiz 🧠</h2><p class="meta">Sawal ${qi+1} / ${Q.length}. Sahi: ${qs}. Streak: ${sk>0?'🔥'.repeat(Math.min(sk,5)):'—'}</p><div class="bar" title="Waqt"><i id="tb" style="width:100%;background:var(--c);transition:width 12s linear"></i></div><p class="q">${q}</p>`+o.map((t,i)=>`<button class="btn" data-i="${i}">${t}</button>`).join('')+'<div id="qf"></div>';
+requestAnimationFrame(()=>requestAnimationFrame(()=>{const t=$('#tb');if(t)t.style.width='0'}));
+let done=false;const fin=i=>{if(done)return;done=true;clearTimeout(tm);const B=$$('#p3 .btn');B.forEach(x=>x.disabled=true);B[c].classList.add('ok');let msg;
+if(i==c){qs++;sk++;if(sk>1)bs+=5;if(sk>=3)cele('COMBO x'+sk+'! 🔥');else cele();msg='Sahi jawab! 🎊'}
+else{sk=0;if(i>=0)B[i].classList.add('no');msg=(i<0?'Waqt khatam! ⏰ ':'Qareeb qareeb! ')+'Sahi jawab hai: '+o[c]+'.'}
+$('#qf').innerHTML=`<div class="react">${msg}</div><button class="btn go" id="qn">${qi==Q.length-1?'Score dekho':'Agla sawal'}</button>`;$('#qn').onclick=()=>{qi++;quiz()}};
+$$('#p3 .btn').forEach(b=>b.onclick=()=>fin(+b.dataset.i));tm=setTimeout(()=>fin(-1),12000)}
+quiz();
+
+/* 4. yaadasht ka khel */
+const E=['🍵','🍛','🏏','🪁','🚌','🥭','🌶️','🎧','🐐','🛺'];
+const L=[{n:'Aasan',p:6,pv:3000,m:24,t:0},{n:'Thora Mushkil',p:8,pv:1200,m:22,t:0},{n:'Bohat Mushkil',p:10,pv:0,m:28,t:75}];
+let G=null,open=1;
+function lvl(){$('#lv').innerHTML=L.map((l,i)=>`<button class="btn" data-i="${i}" ${i<open?'':'disabled'}>${i<open?'':'🔒 '}${l.n}</button>`).join('');$$('#lv .btn').forEach(b=>b.onclick=()=>start(+b.dataset.i))}
+function hud(){const s=L[G.lv];$('#hud').innerHTML=`<span>🎯 Jore ${G.found}/${s.p}</span><span>👆 Chaal ${G.moves}/${s.m}</span>${s.t?`<span>⏱ ${G.t}s</span>`:''}`}
+function stop(){if(G)clearInterval(G.ti);$('#board').innerHTML=''}
+function start(i){stop();const s=L[i],d=E.slice(0,s.p),deck=[...d,...d].sort(()=>Math.random()-.5);G={lv:i,moves:0,found:0,open:[],lock:true,t:s.t};
+$('#board').innerHTML=deck.map(e=>`<button class="mc${s.pv?' up':''}" data-e="${e}" aria-label="card"><span>${e}</span></button>`).join('');$$('.mc').forEach(c=>c.onclick=()=>flip(c));
+$('#gm').textContent=s.pv?'Dhyan se dekho, card abhi ulte hone wale hain!':'Koi jhalak nahi milegi. Yaadasht pe bharosa rakho!';hud();
+const g=G;setTimeout(()=>{if(G!==g)return;$$('.mc').forEach(c=>c.classList.remove('up'));g.lock=false;$('#gm').textContent='Shuru karo!';if(s.t)g.ti=setInterval(()=>{g.t--;hud();if(g.t<=0)end(false)},1000)},s.pv||400)}
+function flip(c){if(!G||G.lock||c.classList.contains('up'))return;const g=G,s=L[g.lv];c.classList.add('up');g.open.push(c);if(g.open.length<2)return;g.moves++;const[a,b]=g.open;g.open=[];
+if(a.dataset.e==b.dataset.e){a.classList.add('done');b.classList.add('done');g.found++;hud();burst(30,innerWidth/2,innerHeight/2);if(g.found==s.p)end(true);else if(g.moves>=s.m)end(false)}
+else{g.lock=true;hud();setTimeout(()=>{if(G!==g)return;a.classList.remove('up');b.classList.remove('up');g.lock=false;if(g.moves>=s.m)end(false)},700)}}
+function end(w){const lv=G.lv;clearInterval(G.ti);G.lock=true;G=null;$('#hud').innerHTML='<span>Khel khatam</span>';
+if(w){cele(lv==2?'SAB JEET LIYE! 👑':'LEVEL PAAR! ⭐');if(open<=lv+1&&lv<2)open=lv+2;$('#gm').textContent=lv<2?'Wah! Agla level khul gaya hai.':'Teeno level jeet liye. Tum to yaadasht ke badshah ho!'}else $('#gm').textContent='Bas thori si kami reh gayi. Level dobara dabao!';lvl()}
+lvl();
+</script></body></html>
